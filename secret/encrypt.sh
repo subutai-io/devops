@@ -39,7 +39,7 @@ nuget_path="nuget.exe"
 while [ $# -ge 1 ]; do
     case "$1" in
         --nuget-path=*)
-            branch="`echo ${1} | awk '{print substr($0,12)}'`" ;;
+            nuget_path="`echo ${1} | awk '{print substr($0,14)}'`" ;;
         --help)
             showhelp
             exit 0
@@ -54,10 +54,12 @@ while [ $# -ge 1 ]; do
     shift
 done
 
+os="windows"
 echo "Checking required software"
 
 if [ "$os" == "windows" ]; then
-    $nuget_path
+    echo "Checking $nuget_path"
+    $nuget_path 1> /dev/null 2&>1
     if [ $? -ne 0 ]; then
         echo "nuget package wasn't found in PATH. Specify path to nuget.exe with --nuget-path option. See help for more info."
         exit 3
