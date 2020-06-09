@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     c = cdn.CDN(options.host,
                 user=options.gpguser,
-                fingerprint=options.fingerprint)
+                fingerprint=options.fingerprint, verify=False)
     try:
         result = c.Upload(options.srcfile)
         if result is None:
