@@ -25,15 +25,15 @@ if __name__ == '__main__':
 
     if options.gpguser == '':
         print("Specify GPG key ID with --user=<id> option")
-        sys.exit(2)
+        sys.exit(3)
 
     if options.fingerprint == '':
         print("Specify fingerprint with --fingerprint=<fingerprint> option")
-        sys.exit(2)
+        sys.exit(4)
 
     if not os.path.isfile(options.srcfile):
         print("Specified file was not found")
-        sys.exit(3)
+        sys.exit(5)
 
     c = cdn.CDN(options.host,
                 user=options.gpguser,
@@ -44,6 +44,6 @@ if __name__ == '__main__':
             print("File upload failed")
             sys.exit(2)
         print("File was succesfully uploaded")
-    except:
-        print("Error occured during upload")
+    except Exception as e:
+        print("Error occured during upload: " + str(e))
         sys.exit(2)
